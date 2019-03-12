@@ -1,0 +1,70 @@
+﻿<Window x:Class="TeacherJournal.view.ScheduleItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeacherJournal.view"
+        mc:Ignorable="d"
+        Title="ScheduleItemWindow" Height="340" Width="435.796" MinWidth="430"  Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen" WindowState="Normal">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFE1E2E1" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="10 ">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid  Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Padding" Value="5 3"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">Тип неділі</TextBlock>
+            <ComboBox x:Name="cbTypeOfWeek" Grid.Row="0" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id"></ComboBox>
+            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">День неділі</TextBlock>
+            <ComboBox x:Name="cbDayOfWeek" Grid.Row="1" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id"></ComboBox>
+            
+            <TextBlock Grid.Row="2" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">№ пари</TextBlock>
+            <ComboBox x:Name="cbNumberOfLesson" Grid.Row="2" Grid.Column="1" FontSize="12"></ComboBox>
+                
+            <TextBlock Grid.Row="3" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">Предмет</TextBlock>
+            <ComboBox x:Name="cbSubject" Grid.Row="3" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id"></ComboBox>
+            <TextBlock Grid.Row="4" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">Тип заняття</TextBlock>
+            <ComboBox x:Name="cbTypeOfLesson" Grid.Row="4" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id"></ComboBox>
+            <TextBlock Grid.Row="5" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">Аудиторія</TextBlock>
+            <ComboBox x:Name="cbClassroom" Grid.Row="5" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id"></ComboBox>
+            <TextBlock Grid.Row="6" Grid.Column="0" Foreground="#FF212121" FontSize="16" FontWeight="Bold">Группа</TextBlock>
+
+            <ScrollViewer Grid.Row="6" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Foreground="#FF212121">
+                <StackPanel x:Name="GroupVerticalPanel"  HorizontalAlignment="Left"/>
+            </ScrollViewer>
+
+            <Button x:Name="btnAddNewGroup" Style="{DynamicResource RoundedBlueShortButtonStyle}" Grid.Row="6" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Click="btnAddNewGroup_Click" BorderBrush="{x:Null}">+</Button>
+            
+        </Grid>
+        <Button Style="{DynamicResource RoundedBlueLongButtonStyle}" Grid.Row="1" x:Name="btnAccept" Width="110" MinHeight="30" Height="Auto" MinWidth="100" Margin="10" Click="AcceptAndSave" BorderBrush="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Right">Приняти</Button>
+    </Grid>
+</Window>

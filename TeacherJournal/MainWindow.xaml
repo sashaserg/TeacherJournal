@@ -1,0 +1,141 @@
+﻿<Window x:Class="TeacherJournal.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeacherJournal"
+        mc:Ignorable="d"
+        Title="Журнал викладача" Height="625" Width="1126" MinWidth="950" MinHeight="380"
+        FontSize="16"
+        WindowStartupLocation="CenterScreen" WindowState="Normal" Loaded="Window_Loaded" Background="#FF212121">
+    <Window.Resources>
+        <local:ListToStringConverter x:Key="ListToStringConverter"/>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
+            <Menu Foreground="#FFE1E2E1" Background="#FF212121">
+                <MenuItem Header="Дані" Foreground="#FFE1E2E1">
+                    <MenuItem Header="Очистити файл бд" Foreground="Black" Click="ClearTerms_Click"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition ></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE1E2E1" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <TextBlock Grid.Row="0" Margin="15 10 10 0" Text="Семестр:" Foreground="#FF212121" FontSize="20" FontWeight="Bold"/>
+            <Grid Grid.Row="1" Margin="0 5 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="cbSemesterList"  Grid.Column="0" Margin="12 5 5 5"  SelectedIndex="0" IsEditable="False" VerticalAlignment="Center" MinHeight="35" MinWidth="160" DisplayMemberPath="name" SelectionChanged="cbSemesterList_SelectionChanged"/>
+                <Button x:Name="btnEditSemester" Style="{DynamicResource RoundedBlueShortButtonStyle}" Grid.Column="1" Margin="0 5 5 5" Content="{StaticResource WhitePenImage}" Click="btnEditSemester_Click" BorderBrush="{x:Null}" Width="36" />
+                <Button x:Name="btnAddNewSemester" Style="{DynamicResource RoundedBlueShortButtonStyle}" Grid.Column="2" Margin="0 5 10 5" Click="btnAddNewSemester_Click" BorderBrush="{x:Null}" Width="36" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">+</Button>
+            </Grid>
+
+            <Button x:Name="btnSubject" Style="{DynamicResource RoundedBlueLongButtonStyle}" Margin="10 8 10 10" Grid.Row="2" Content="Предмети" Click="OpenVocabulary" BorderBrush="{x:Null}"/>
+            <Button x:Name="btnGroup" Style="{DynamicResource RoundedBlueLongButtonStyle}" Margin="10 0 10 10" Grid.Row="3" Content="Групи" Click="OpenVocabulary" BorderBrush="{x:Null}"/>
+            <Button x:Name="btnClassroom" Style="{DynamicResource RoundedBlueLongButtonStyle}" Margin="10 0 10 10" Grid.Row="4" Content="Аудиторії" Click="OpenVocabulary" BorderBrush="{x:Null}"/>
+            <Button x:Name="btnSchedule" Style="{DynamicResource RoundedBlueLongButtonStyle}" Margin="10 0 10 10" Grid.Row="5" Content="Розклад" Click="btnSchedule_Click" BorderBrush="{x:Null}"/>
+            <Button x:Name="btnToDoc" Style="{DynamicResource RoundedBlueLongButtonStyle}" Margin="10 0 10 10" Grid.Row="6" Content="В DOC" Click="btnToDoc_Click" BorderBrush="{x:Null}"/>
+            <Button x:Name="btnTeacherInfo" Style="{DynamicResource RoundedBlueLongButtonStyle}"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 10 10" Grid.Row="7" Content="Дані викладача" Click="OpenTeacherInfo_Click" BorderBrush="{x:Null}"/>
+        </Grid>
+        <!--<Border BorderBrush="#cccccc" BorderThickness="1" Margin="10,75,5,-73"/>-->
+        <Grid Grid.Row="1" Grid.Column="1" OpacityMask="#FF3A2A2A">
+            <Grid.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFE1E2E1" Offset="0.134"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition ></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="195" Height="48">
+                <TextBlock Grid.Row="0" FontSize="24" Text="Заняття" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121" Width="100" Height="32"/>
+            </Grid>
+            <Grid Grid.Row="1" Margin="10 0 10 15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Дата з " VerticalAlignment="Center" Foreground="#FF212121" />
+                    <DatePicker x:Name="dpStartDate" VerticalAlignment="Center" MinWidth="150" SelectedDateChanged="dp_SelectedDateChanged" PreviewTextInput="dpPreviewTextInput" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF212121" Margin="0,2" MaxWidth="200" Width="150"/>
+                    <TextBlock Text="по " Margin="10 0 0 0" VerticalAlignment="Center" Foreground="#FF212121"/>
+                    <DatePicker x:Name="dpEndDate" VerticalAlignment="Center" MinWidth="150" SelectedDateChanged="dp_SelectedDateChanged" PreviewTextInput="dpPreviewTextInput" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF212121" Margin="0,2" MaxWidth="200"></DatePicker>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Width="258">
+                    <Button Click="ShowToday" Style="{DynamicResource RoundedBlueLongButtonStyle}" Padding="5 0" Margin="0 0 10 0" Width="125" Content="Сьогодні" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Button Click="ShowAllTerm" Style="{DynamicResource RoundedBlueLongButtonStyle}" Padding="5 0" Content="Семестр" Width="125" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left"/>
+                 </StackPanel>
+            </Grid>
+            <DataGrid Grid.Row="2" x:Name="lessonsGrid"
+                      CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True" AutoGenerateColumns="False"
+                      RowBackground="LightGray" AlternatingRowBackground="White" FontSize="16" Margin="10 0 10 15" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF212121">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding Path=date, StringFormat=\{0:dd.MM\}}" Width="0.5*"/>
+                    <DataGridTextColumn Header="№ Пари" Binding="{Binding Path=numOfLesson}" Width="Auto"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding Path=typeOfLesson.name}" Width="Auto"/>
+                    <DataGridTextColumn Header="Аудиторія" Binding="{Binding Path=classroom.name}" Width="Auto"/>
+                    <DataGridTextColumn Header="Групи" Binding="{Binding Path=groups, Converter={StaticResource ListToStringConverter}}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Предмет" Binding="{Binding Path=subject.name}" Width="0.5*"/>
+                    <DataGridTextColumn Header="Тема" Binding="{Binding Path=theme}" Width="*"/>
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="EditRow_Click" Content="{StaticResource PenImage}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="DeleteRow_Click" Content="{StaticResource TrashBoxImage}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Grid Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Width="195" Height="48">
+                <Button Click="btnAddLesson" Style="{DynamicResource RoundedBlueLongButtonStyle}" Padding="5 0" Margin="0 0 5 5" Width="auto" Content="Додати заняття" BorderBrush="{x:Null}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

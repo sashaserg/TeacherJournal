@@ -1,0 +1,48 @@
+﻿<Window x:Class="TeacherJournal.view.VocabularyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeacherJournal"
+        mc:Ignorable="d"
+        Title="VocabularyWindow" Height="408.105" Width="290" MinWidth="250"
+        WindowStartupLocation="CenterScreen" WindowState="Normal" Loaded="Window_Loaded">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFE1E2E1" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="0 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" x:Name="tbVocabularyName" TextAlignment="Center" FontSize="20" FontWeight="Bold" Padding="10 5" Foreground="#FF212121" Text="Словник"/>
+
+        <DataGrid x:Name="VocabularyGrid" Grid.Row="1" AutoGenerateColumns="False" RowBackground="LightGray" AlternatingRowBackground="White" FontSize="16" CanUserAddRows="False" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF212121">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn Header="id семестра" Binding="{Binding Path=idTerm}"/>-->
+                <DataGridTextColumn Header="Назва" Binding="{Binding Path=name}" Width="*"/>
+                <DataGridTemplateColumn Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteRow_Click" Content="{StaticResource TrashBoxImage}" Height="30" Width="30"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAddRow" Style="{DynamicResource RoundedBlueLongButtonStyle}"  Grid.Column="0" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Click="btnAddRow_Click" Width="110" BorderBrush="{x:Null}">Додати</Button>
+            <Button x:Name="btnAcceptClose" Style="{DynamicResource RoundedBlueLongButtonStyle}" Grid.Column="1" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Click="btnAcceptClose_Click" Width="110" BorderBrush="{x:Null}">Зберегти</Button>
+        </Grid>
+    </Grid>
+</Window>

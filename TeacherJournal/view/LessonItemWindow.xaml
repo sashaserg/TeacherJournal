@@ -1,0 +1,89 @@
+﻿<Window x:Class="TeacherJournal.view.LessonItemWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TeacherJournal.view"
+        mc:Ignorable="d"
+        Title="Заняття" Height="500" Width="560" MinWidth="550"
+        WindowStartupLocation="CenterScreen" WindowState="Normal" Loaded="Window_Loaded" Foreground="#FF212121">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFE1E2E1" Offset="0"/>
+            <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Margin="15 10 15 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Padding" Value="5 3"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121">Тема</TextBlock>
+            <TextBox x:Name="tbLessonTheme" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Background="{x:Null}" Foreground="#FF212121" BorderBrush="#FFA7A7AC" Height="25" Margin="0,10,0,6" SelectionBrush="#FF0076FF"></TextBox>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121">Дата</TextBlock>
+            <DatePicker x:Name="dpLessonDate" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Background="{x:Null}" Foreground="#FF212121" Height="25" BorderBrush="{x:Null}" Margin="0,8,0,5"></DatePicker>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121">№ пари</TextBlock>
+            <ComboBox x:Name="cbLessonNumber" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" FontSize="12px"></ComboBox>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121">Предмет</TextBlock>
+            <ComboBox x:Name="cbLessonSubject" Grid.Row="3" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id" VerticalAlignment="Center" Height="25"></ComboBox>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121">Аудиторія</TextBlock>
+            <ComboBox x:Name="cbLessonClassroom" Grid.Row="4" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id" VerticalAlignment="Center" Height="25"></ComboBox>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121">Тип заняття</TextBlock>
+            <ComboBox x:Name="cbLessonType" Grid.Row="5" Grid.Column="1" DisplayMemberPath="name" SelectedValuePath="id" VerticalAlignment="Center" Height="25"></ComboBox>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Margin="0 5" VerticalAlignment="Center" FontWeight="Bold" Foreground="#FF212121" Text="Повна пара"/>
+            <CheckBox IsChecked="True"  x:Name="cbCountOfHours" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Background="White" Foreground="#FF212121" BorderBrush="Black" BorderThickness="1">
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+
+            <TextBlock Grid.Row="7" Grid.Column="0" Margin="0 5" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FF212121">Группа</TextBlock>
+            <ScrollViewer Grid.Row="7" Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" CanContentScroll="True" Foreground="#FF212121">
+                <StackPanel x:Name="GroupVerticalPanel" HorizontalAlignment="Left"/>
+            </ScrollViewer>
+            <Button x:Name="btnAddNewGroup" Style="{DynamicResource RoundedBlueShortButtonStyle}" Grid.Row="7" Grid.Column="2"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" Click="btnAddNewGroup_Click" BorderBrush="{x:Null}">+</Button>
+
+        </Grid>
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="btnAccept" Style="{DynamicResource RoundedBlueLongButtonStyle}" Grid.Column="2" Width="110" MinHeight="30" Height="Auto" MinWidth="100" HorizontalAlignment="Right" Margin="0,10,0,10" Click="AcceptAndSave" FontSize="18" FontWeight="Bold" Foreground="#FFE1E2E1" Background="#FF0076FF" BorderBrush="{x:Null}">Прийняти</Button>
+        </Grid>
+    </Grid>
+</Window>
